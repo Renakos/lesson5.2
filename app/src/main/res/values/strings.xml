@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">lesson5.2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="amountofplayers">Кол-во игроков:</string>
+    <string name="teamname">Название команды:</string>
+    <string name="players">Игроки:</string>
+    <string name="team_name">Название команды</string>
+    <string name="et_players">Игроки команды</string>
+    <string name="add_team">Добавить команду</string>
+</resources>
