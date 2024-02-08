@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson52.R
-import com.example.lesson52.data.model.FootballTeam
+import com.example.lesson52.data.local.room.entities.FootballTeam
 
-class FootballTeamAdapter() :
+class FootballTeamAdapter :
     RecyclerView.Adapter<FootballTeamAdapter.ViewHolder>() {
 
     private var footballTeams = mutableListOf<FootballTeam>()

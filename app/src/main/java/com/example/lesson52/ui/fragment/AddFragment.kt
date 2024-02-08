@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.lesson52.data.model.FootballTeam
+import com.example.lesson52.data.local.room.entities.FootballTeam
 import com.example.lesson52.data.viewmodel.FootballTeamViewModel
 import com.example.lesson52.databinding.FragmentAddBinding
 import com.example.lesson52.utils.UiState
@@ -61,7 +61,7 @@ class AddFragment : Fragment() {
             val teamName = binding.etTeamName.text.toString()
             val players = binding.etPlayers.text.toString().split(",").toSet()
             val amountOfPlayers = players.size
-            val footballTeam = FootballTeam(teamName, amountOfPlayers, players)
+            val footballTeam = FootballTeam(0,teamName, amountOfPlayers, players)
             if (binding.etTeamName.text.isEmpty() || binding.etPlayers.text.isEmpty()) {
                 Log.e("Handle", "setupAddButton: teamName or players is null")
                 Snackbar.make(

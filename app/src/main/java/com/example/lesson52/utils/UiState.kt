@@ -1,6 +1,6 @@
 package com.example.lesson52.utils
 
-import com.example.lesson52.data.model.FootballTeam
+import com.example.lesson52.data.local.room.entities.FootballTeam
 
 sealed class UiState {
     object Loading : UiState()
