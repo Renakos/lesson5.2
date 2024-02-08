@@ -61,8 +61,8 @@ class RecyclerViewFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView() {
-        binding.rv.apply {
+    private fun setupRecyclerView() = with(binding) {
+        rv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = footballTeamAdapter
         }
