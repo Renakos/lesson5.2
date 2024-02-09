@@ -61,7 +61,7 @@ class AddFragment : Fragment() {
             val teamName = binding.etTeamName.text.toString()
             val players = binding.etPlayers.text.toString().split(",").toSet()
             val amountOfPlayers = players.size
-            val footballTeam = FootballTeam(0,teamName, amountOfPlayers, players)
+            val footballTeam = FootballTeam(0, teamName, amountOfPlayers, players)
             if (binding.etTeamName.text.isEmpty() || binding.etPlayers.text.isEmpty()) {
                 Log.e("Handle", "setupAddButton: teamName or players is null")
                 Snackbar.make(

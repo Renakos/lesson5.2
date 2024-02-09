@@ -1,16 +1,10 @@
 package com.example.lesson52.data.repository
 
-import com.example.lesson52.data.local.room.dao.FootballTeamsDao
+import com.example.lesson52.App
 import com.example.lesson52.data.local.room.entities.FootballTeam
 
 class FootballTeamRepository {
-
-    private val footballTeams: MutableList<FootballTeam> = mutableListOf()
-    private lateinit var footballTeamsDao: FootballTeamsDao
-
-    fun setFootballTeamsDao(dao: FootballTeamsDao) {
-        footballTeamsDao = dao
-    }
+    private val footballTeamsDao = App.db.footballTeamsDao()
 
     fun getAllTeams(): List<FootballTeam> {
         return footballTeamsDao.getAll()
@@ -24,5 +18,10 @@ class FootballTeamRepository {
         }
     }
 
-    // Дополнительные методы для обновления, удаления и т.д. можно добавить здесь
+    fun deleteTeam(footballTeam: FootballTeam) {
+        footballTeamsDao.deleteTeam(footballTeam)
+        footballTeamsDao.updateTeam(footballTeam)
+    }
+
+
 }

@@ -11,7 +11,8 @@ import com.example.lesson52.data.local.room.entities.FootballTeam
 class FootballTeamAdapter :
     RecyclerView.Adapter<FootballTeamAdapter.ViewHolder>() {
 
-    private var footballTeams = mutableListOf<FootballTeam>()
+    var footballTeams = mutableListOf<FootballTeam>()
+    private var onItemLongClickListener: OnItemLongClickListener? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val teamNameTextView: TextView = itemView.findViewById(R.id.teamName)
@@ -22,6 +23,15 @@ class FootballTeamAdapter :
             teamNameTextView.text = footballTeam.teamName
             amountOfPlayersTextView.text = footballTeam.amountOfPlayers.toString()
             playersTextView.text = footballTeam.players.joinToString()
+
+            // Обработка длительного нажатия
+            itemView.setOnLongClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemLongClickListener?.onItemLongClick(position)
+                }
+                true
+            }
         }
     }
 
@@ -40,7 +50,16 @@ class FootballTeamAdapter :
     }
 
     fun updateData(newData: List<FootballTeam>) {
-        footballTeams = newData.toMutableList()
+        footballTeams.clear()
+        footballTeams.addAll(newData)
         notifyDataSetChanged()
+    }
+
+    fun setOnItemLongClickListener(listener: OnItemLongClickListener) {
+        this.onItemLongClickListener = listener
+    }
+
+    interface OnItemLongClickListener {
+        fun onItemLongClick(position: Int)
     }
 }

@@ -21,7 +21,6 @@ class RecyclerViewFragment : Fragment() {
     private val binding get() = _binding!!
     private var footballTeamAdapter = FootballTeamAdapter()
     private val viewModel: FootballTeamViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,12 +34,18 @@ class RecyclerViewFragment : Fragment() {
 
         setupViewModel()
         setupRecyclerView()
+        checkForTeams()
         setupAddTeamButton()
-
+        setupRecyclerViewClick()
         Log.e("TAG", "onViewCreated: ${viewModel.data.value}")
     }
 
     private fun setupViewModel() {
+        viewModel.data.observe(viewLifecycleOwner) { teams ->
+            footballTeamAdapter.updateData(teams)
+            footballTeamAdapter.notifyDataSetChanged()
+        }
+
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -57,15 +62,21 @@ class RecyclerViewFragment : Fragment() {
                     Log.e("football", "setupViewModel: Error")
                     Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
                 }
+
             }
         }
     }
+
 
     private fun setupRecyclerView() = with(binding) {
         rv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = footballTeamAdapter
         }
+    }
+
+    private fun checkForTeams() {
+        footballTeamAdapter.updateData(viewModel.allTeams)
     }
 
     private fun setupAddTeamButton() {
@@ -75,6 +86,18 @@ class RecyclerViewFragment : Fragment() {
 
         }
     }
+
+    private fun setupRecyclerViewClick() {
+        footballTeamAdapter.setOnItemLongClickListener(object :
+            FootballTeamAdapter.OnItemLongClickListener {
+            override fun onItemLongClick(position: Int) {
+                val teamToDelete = footballTeamAdapter.footballTeams[position]
+                viewModel.deleteTeam(teamToDelete)
+
+            }
+        })
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
