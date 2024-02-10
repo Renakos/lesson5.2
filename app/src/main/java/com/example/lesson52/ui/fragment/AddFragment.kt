@@ -48,12 +48,7 @@ class AddFragment : Fragment() {
                 }
 
                 is UiState.Success -> {
-                    Snackbar.make(
-                        requireView(),
-                        "Успешно добавлена команда",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
+                    Log.e("Success","AddedTeam")
                 }
 
                 is UiState.Error -> {
