@@ -23,8 +23,6 @@ class FootballTeamAdapter :
             teamNameTextView.text = footballTeam.teamName
             amountOfPlayersTextView.text = footballTeam.amountOfPlayers.toString()
             playersTextView.text = footballTeam.players.joinToString()
-
-            // Обработка длительного нажатия
             itemView.setOnLongClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -45,9 +43,7 @@ class FootballTeamAdapter :
         holder.bind(footballTeam)
     }
 
-    override fun getItemCount(): Int {
-        return footballTeams.size
-    }
+    override fun getItemCount() = footballTeams.size
 
     fun updateData(newData: List<FootballTeam>) {
         footballTeams.clear()

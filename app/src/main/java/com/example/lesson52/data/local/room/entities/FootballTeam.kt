@@ -6,13 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "football_team_table")
 data class FootballTeam(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
-    @ColumnInfo("name")
-    val teamName: String,
-    @ColumnInfo("amount")
-    val amountOfPlayers: Int,
-    @ColumnInfo("team_players")
-    val players: Set<String>
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
+    @ColumnInfo("name") val teamName: String,
+    @ColumnInfo("amount") val amountOfPlayers: Int,
+    @ColumnInfo("team_players") val players: Set<String>
 )
 

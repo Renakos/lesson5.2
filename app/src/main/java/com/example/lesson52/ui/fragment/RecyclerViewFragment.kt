@@ -43,23 +43,20 @@ class RecyclerViewFragment : Fragment() {
     private fun setupViewModel() {
         viewModel.data.observe(viewLifecycleOwner) { teams ->
             footballTeamAdapter.updateData(teams)
-            footballTeamAdapter.notifyDataSetChanged()
         }
 
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    Log.e("football", "setupViewModel: Loading")
                     Snackbar.make(requireView(), "Загрузка...", Snackbar.LENGTH_SHORT).show()
                 }
 
                 is UiState.Success -> {
-                    Log.e("football", "setupViewModel: ${state.data}")
                     footballTeamAdapter.updateData(state.data)
+
                 }
 
                 is UiState.Error -> {
-                    Log.e("football", "setupViewModel: Error")
                     Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
                 }
 
@@ -81,9 +78,7 @@ class RecyclerViewFragment : Fragment() {
 
     private fun setupAddTeamButton() {
         binding.fabAddTeam.setOnClickListener {
-            Log.e("navigation", "nonav")
             findNavController().navigate(R.id.action_recyclerViewFragment_to_addFragment)
-
         }
     }
 

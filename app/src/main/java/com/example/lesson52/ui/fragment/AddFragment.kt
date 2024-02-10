@@ -22,8 +22,7 @@ class AddFragment : Fragment() {
     private val viewModel: FootballTeamViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,16 +39,31 @@ class AddFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    Log.e("UiState", "callOnLoading")
+                    Snackbar.make(
+                        requireView(),
+                        "Загрузка...",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .show()
                 }
 
                 is UiState.Success -> {
-                    Log.e("UiState", "FixCall")
+                    Snackbar.make(
+                        requireView(),
+                        "Успешно добавлена команда",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .show()
                 }
 
                 is UiState.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        requireView(),
+                        state.message,
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .show()
                 }
             }
         }
